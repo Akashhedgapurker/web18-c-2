@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+      body{
+        width: 90%;
+        margin: auto;
+      }
+      #navbar{
+        color: whitesmoke;
+        display: flex;
+        font-size: larger;
+        justify-content: space-evenly;
+        background-color: rgb(92, 92, 230);
+        border: 1px solid black;
+      }
+      a{
+        color: whitesmoke;
+        
+        align-items: flex-end;
+        
+      }
+
+       #coffee_list{
+        margin-top: 20px ;
+        
+        border: 1px solid black;
+        height: 600px;
+        width: auto;
+      } 
+      
+    </style>
+  </head>
+
+  <body>
+    <div id="navbar">
+      <!--Add navbar divs here-->
+      <!-- Link to bucket.html -->
+      <p>Login</p>
+      <p>Signup</p>
+      <p><a href="bucket.html">Bucket</a></p>
+      <div id="coffee_count"><p>0</p>
+        <!--Show total number of coffee added to bucket here, do not add anything only Total count. Not even "Count - 5" but like this "5" -->
+      </div>
+    </div>
+
+    <div id="coffee_list">
+      <!--Show coffee list here in grid format-->
+      <!-- add an add to bucket button to each item, give it HTML id as 'add_to_bucket' -->
+    </div>
+  </body>
+</html>
+<script>
+
+  async function getData(){
+  let url= "https://masai-mock-api.herokuapp.com/coffee/menu";
+
+let res = await fetch(url);
+
+let data = await res.json();
+
+console.log("data:", data)
+
+append(data);
+}
+
+
+function append(data){
+  let container = document.getElementById("coffee_list")
+
+  data.forEach(function (el) {
+    let p=document.createElement("p");
+    
+    p.innerText = el.data;
+
+    console.log("p:")
+    container.append(p); 
+  });
+}
+
+async function main(){
+  let data = await getData();
+
+  append(data);
+}
+</script>
